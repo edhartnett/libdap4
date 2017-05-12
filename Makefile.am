@@ -19,7 +19,7 @@ endif
 # or ./configure --enable-developer --disable-shared
 # the --disable-shared is not required, but it seems to help with debuggers.
 CXXFLAGS_DEBUG = -g3 -O0  -Wall -W -Wcast-align 
-TEST_COV_FLAGS = -ftest-coverage -fprofile-arcs
+TEST_COV_FLAGS = -g3 -ftest-coverage -fprofile-arcs
 
 if BUILD_DEVELOPER
 AM_CXXFLAGS += $(CXXFLAGS_DEBUG)
@@ -106,16 +106,21 @@ pkgconfig_DATA = libdap.pc libdapclient.pc libdapserver.pc
 CLEANFILES = *.log *.output *.gcda *.gcno $(BISON_SRC) $(FLEX_SRC) \
 	dods-datatypes.h xdr-datatypes.h getdap.1 dap-config.1 getdap4.1
 
+HTML_DOCS=html
+DOXYGEN_CONF=doxy.conf
+
+# This target only builds the documents, it does not move them to
+# github. Use the 'gh-docs' target below for that.
 .PHONY: docs
-docs: doxy.conf
-	doxygen doxy.conf
-	(cd docs && tar -czf html.tar.gz html)
+docs: ${DOXYGEN_CONF}
+	doxygen ${DOXYGEN_CONF}
 
-# Not needed. jhrg 1/4/16
-# doxy.conf: doxy.conf.in config.status
-# 	./config.status --file=doxy.conf
+# GitHub.io docs 
+.PHONY: gh-docs 
+gh-docs:
+	./build-gh-docs.sh
 
-# cccc computes metrics like Lines of code and McCabe. It'a available
+# cccc computes metrics like Lines of code and McCabe. It's available
 # on the web...
 .PHONY: cccc
 cccc:
