@@ -75,6 +75,7 @@ class D4MarshallerTest: public CppUnit::TestFixture {
     CPPUNIT_TEST (test_str);
     CPPUNIT_TEST (test_opaque);
     CPPUNIT_TEST (test_vector);
+    CPPUNIT_TEST (test_voids);
 
     CPPUNIT_TEST_SUITE_END( );
 
@@ -310,6 +311,21 @@ public:
             if (write_baselines)
                 write_binary_file(oss.str().data(), oss.str().length(), path + "/test_vector_1_bin.dat");
             CPPUNIT_ASSERT(cmp(oss.str().data(), oss.str().length(), path + "/test_vector_1_bin.dat"));
+        }
+        catch (Error &e) {
+            cerr << "Error: " << e.get_error_message() << endl;
+            CPPUNIT_FAIL("Caught an exception.");
+        }
+    }
+
+    void test_voids()
+    {
+        ostringstream oss;
+        try {
+            D4StreamMarshaller dsm(oss);
+
+            dsm.put_vector_start(0);
+            dsm.put_vector_end();
         }
         catch (Error &e) {
             cerr << "Error: " << e.get_error_message() << endl;
