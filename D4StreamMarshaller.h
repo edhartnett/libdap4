@@ -155,7 +155,8 @@ public:
      * @see put_vector_end()
      */
     virtual void put_vector_start(int /*num*/) {
-            cout<<"WTF!!\n\n";
+       int i = 0;
+       cout << i;
     }
 
     virtual void put_vector_part(char */*val*/, unsigned int /*num*/, int /*width*/, Type /*type*/);
