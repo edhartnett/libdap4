@@ -142,6 +142,8 @@ CPPUNIT_TEST_SUITE (DDSTest);
     // see comment in code below. jhrg 2/4/14 CPPUNIT_TEST(get_response_size_test_seq);
     CPPUNIT_TEST(get_response_size_test_seq_c);
 
+    CPPUNIT_TEST(cons_Int32_test);
+
     CPPUNIT_TEST_SUITE_END()
     ;
 
@@ -482,6 +484,12 @@ CPPUNIT_TEST_SUITE (DDSTest);
         CPPUNIT_ASSERT(dds2->get_request_size(true) == 17288);
     }
 
+    void cons_Int32_test()
+    {
+        Int32 *i = new Int32("a", "b");
+        CPPUNIT_ASSERT(1);
+    }
+    
 #if 0
     // This test includes a DAP String and the current implementation of Str::width(bool)
     // returns sizeof(std::string) which I'm not sure is what it should be doing. Return to
