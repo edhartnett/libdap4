@@ -70,11 +70,11 @@ D4-xml.tar.gz: D4-xml/DMR_*[0-9].xml
 #
 
 if CPPUNIT
-UNIT_TESTS = marshT arrayT attrTableT structT sequenceT ddsT dasT \
-	RegexTest ArrayTest AttrTableTest ByteTest MIMEUtilTest ancT DASTest \
-	DDSTest	DDXParserTest  generalUtilTest HTTPConnectTest parserUtilTest \
-	RCReaderTest SequenceTest SignalHandlerTest  MarshallerTest \
-	HTTPCacheTest ServerFunctionsListUnitTest
+UNIT_TESTS = marshT arrayT attrTableT structT sequenceT ddsT dasT	\
+RegexTest ArrayTest AttrTableTest ByteTest MIMEUtilTest ancT DASTest	\
+DDSTest Int32Test DDXParserTest generalUtilTest HTTPConnectTest		\
+parserUtilTest RCReaderTest SequenceTest SignalHandlerTest		\
+MarshallerTest HTTPCacheTest ServerFunctionsListUnitTest
 
 if DAP4_DEFINED
 UNIT_TESTS += D4MarshallerTest D4UnMarshallerTest D4DimensionsTest \
@@ -120,6 +120,9 @@ DASTest_LDADD = ../libdap.la $(AM_LDADD)
 
 DDSTest_SOURCES = DDSTest.cc $(TEST_SRC)
 DDSTest_LDADD = ../libdap.la $(AM_LDADD)
+
+Int32Test_SOURCES = Int32Test.cc $(TEST_SRC)
+Int32Test_LDADD = ../libdap.la $(AM_LDADD)
 
 DDXParserTest_SOURCES = DDXParserTest.cc
 DDXParserTest_CPPFLAGS = $(AM_CPPFLAGS) $(XML2_CFLAGS)
